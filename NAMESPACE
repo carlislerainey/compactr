@@ -1,0 +1,4 @@
+export(addxaxis)
+export(aplot)
+export(eplot)
+export(mm)
