@@ -33,7 +33,8 @@
 #' @param xticklab,yticklab the labels for the tick marks. A character vector
 #' the length of \code{xat} and \code{yat}.
 #' @param xlabpos,ylabpos controls the distance from the axis labels to the
-#' axes. Reasonable values range from about 1 to 3.
+#' axes. Reasonable values range from about 1 to 3. \code{eplot()} trys to choose
+#' a reasonable value for \code{ylabpos}.
 #' @param annx,anny include annotations for x and y axes?
 #' @param box should a box be plotted?
 #' @param log a character string which contains "x" if the x axis is to be 
@@ -143,7 +144,7 @@ eplot <-
            main = NULL, text.size = 1, tick.length = 0.02,
            xpos = -.7, ypos = -.5, xat = NULL, yat = NULL,
            xticklab = NULL, yticklab = NULL,
-           xlabpos = 1.5, ylabpos = 1.5, 
+           xlabpos = 1.5, ylabpos = NULL, 
            annx = TRUE, anny = TRUE, 
            box = TRUE, log = "") {
     # create an empty plot
@@ -188,8 +189,11 @@ eplot <-
     # add the y axis
     if (par("mfg")[2] == 1 & anny == TRUE) {
       axis(side = 2, at = yat, las = 1, labels = NA, tck = -tick.length, lwd = 0, lwd.ticks = 1)
-      axis(side = 2, at = yat, las = 1, tick = FALSE, line = ypos, cex.axis =  .9*text.size,
-           labels = yticklab)
+      yaxislabels <- axis(side = 2, at = yat, las = 1, tick = FALSE, line = ypos, cex.axis =  .9*text.size,
+                          labels = yticklab)
+      if (is.null(ylabpos)) {
+        ylabpos <- 0.5 + 0.5*max(nchar(yaxislabels))
+      }
       mtext(side = 2, ylab, line = ylabpos, cex = 1*text.size*deflate)
     }
     
