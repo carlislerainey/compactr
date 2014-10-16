@@ -31,7 +31,7 @@
 #' @param xat,yat the location of the tick marks along the axes. If "none," then
 #' the axis will not be annotated.
 #' @param xticklab,yticklab the labels for the tick marks. A character vector
-#' the length of \code{xat} and \code{yat}.
+#' the length of \code{xat} and \code{yat} or "sci_notation" to use scientific notation.
 #' @param xlabpos,ylabpos controls the distance from the axis labels to the
 #' axes. Reasonable values range from about 1 to 3. \code{eplot()} trys to choose
 #' a reasonable value for \code{ylabpos}.
@@ -178,22 +178,51 @@ eplot <-
       yat <- axTicks(side = 2, log = logypar)
     }
     
+    # calculate the x axis tick locations
+    if (is.null(xat)) {
+     xat <- axis(side = 1) 
+    }
+    
+    # calculate the y axis tick locations
+    if (is.null(yat)) {
+      yat <- axis(side = 2) 
+    }
+    
     # add the x axis
     if (par("mfg")[1] == par("mfg")[3] & annx == TRUE) {
       axis(side = 1, at = xat, labels = NA, tck = -tick.length, lwd = 0, lwd.ticks = 1)
-      axis(side = 1, at = xat, tick = FALSE, line = xpos, cex.axis =  .9*text.size,
-           labels = xticklab)
+      if (!is.null(xticklab)) {
+        if (xticklab == "sci_notation") {
+          axis(side = 1, at = xat, tick = FALSE, line = xpos, cex.axis =  .9*text.size,
+               labels = sci_notation(xat))
+        }
+      } else {
+        axis(side = 1, at = xat, tick = FALSE, line = xpos, cex.axis =  .9*text.size,
+             labels = xticklab)
+      }
       mtext(side = 1, xlab, line = xlabpos, cex = 1*text.size*deflate)
     }
     
     # add the y axis
     if (par("mfg")[2] == 1 & anny == TRUE) {
       axis(side = 2, at = yat, las = 1, labels = NA, tck = -tick.length, lwd = 0, lwd.ticks = 1)
-      yaxislabels <- axis(side = 2, at = yat, las = 1, tick = FALSE, line = ypos, cex.axis =  .9*text.size,
-                          labels = yticklab)
+      if (!is.null(yticklab)) {
+        if (yticklab == "sci_notation") {
+          yaxislabels <- axis(side = 2, at = yat, las = 1, tick = FALSE, line = ypos, cex.axis =  .9*text.size,
+                              labels = sci_notation(yat))
+        }
+      } else {
+        yaxislabels <- axis(side = 2, at = yat, las = 1, tick = FALSE, line = ypos, cex.axis =  .9*text.size,
+                            labels = yticklab)
+      }
       if (is.null(ylabpos)) {
         ylabpos <- 0.5 + 0.5*max(nchar(yaxislabels))
       }
+      if (!is.null(yticklab)) {
+        if (yticklab == "sci_notation") {
+          ylabpos = 3.2
+        }
+      }      
       mtext(side = 2, ylab, line = ylabpos, cex = 1*text.size*deflate)
     }
     
