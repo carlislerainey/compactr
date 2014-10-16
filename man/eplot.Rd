@@ -35,7 +35,7 @@ Reasonable values range from about -1 to 1.}
 the axis will not be annotated.}
 
 \item{xticklab,yticklab}{the labels for the tick marks. A character vector
-the length of \code{xat} and \code{yat}.}
+the length of \code{xat} and \code{yat} or "sci_notation" to use scientific notation.}
 
 \item{xlabpos,ylabpos}{controls the distance from the axis labels to the
 axes. Reasonable values range from about 1 to 3. \code{eplot()} trys to choose
