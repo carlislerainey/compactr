@@ -13,9 +13,3 @@ Description: Creates empty plots with compact axis notation to which users can
     bottom row and the y-axis notation is suppress unless the plot appears
     along the left column.
 License: GPL-2
-Collate:
-    'eplot.R'
-    'addxaxis.R'
-    'compactr-package.R'
-    'mm.R'
-    'aplot.R'
