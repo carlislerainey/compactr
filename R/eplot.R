@@ -192,10 +192,12 @@ eplot <-
     if (par("mfg")[1] == par("mfg")[3] & annx == TRUE) {
       axis(side = 1, at = xat, labels = NA, tck = -tick.length, lwd = 0, lwd.ticks = 1)
       if (!is.null(xticklab)) {
-        if (xticklab == "sci_notation") {
-          axis(side = 1, at = xat, tick = FALSE, line = xpos, cex.axis =  .9*text.size,
-               labels = sci_notation(xat))
-        }
+        if (is.character(yticklab) & length(yticklab) == 1) {
+          if (xticklab == "sci_notation") {
+            axis(side = 1, at = xat, tick = FALSE, line = xpos, cex.axis =  .9*text.size,
+                 labels = sci_notation(xat))
+            }
+          }
       } else {
         axis(side = 1, at = xat, tick = FALSE, line = xpos, cex.axis =  .9*text.size,
              labels = xticklab)
@@ -207,9 +209,11 @@ eplot <-
     if (par("mfg")[2] == 1 & anny == TRUE) {
       axis(side = 2, at = yat, las = 1, labels = NA, tck = -tick.length, lwd = 0, lwd.ticks = 1)
       if (!is.null(yticklab)) {
-        if (yticklab == "sci_notation") {
-          yaxislabels <- axis(side = 2, at = yat, las = 1, tick = FALSE, line = ypos, cex.axis =  .9*text.size,
-                              labels = sci_notation(yat))
+        if (is.character(yticklab) & length(yticklab) == 1) {
+          if (yticklab == "sci_notation") {
+            yaxislabels <- axis(side = 2, at = yat, las = 1, tick = FALSE, line = ypos, cex.axis =  .9*text.size,
+                                labels = sci_notation(yat))
+          }
         }
       } else {
         yaxislabels <- axis(side = 2, at = yat, las = 1, tick = FALSE, line = ypos, cex.axis =  .9*text.size,
@@ -219,8 +223,10 @@ eplot <-
         ylabpos <- 0.5 + 0.5*max(nchar(yaxislabels))
       }
       if (!is.null(yticklab)) {
-        if (yticklab == "sci_notation") {
-          ylabpos = 3.2
+        if (is.character(yticklab) & length(yticklab )== 1) {
+          if (yticklab == "sci_notation") {
+            ylabpos = 3.2
+          } 
         }
       }      
       mtext(side = 2, ylab, line = ylabpos, cex = 1*text.size*deflate)
