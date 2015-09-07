@@ -219,6 +219,10 @@ eplot <-
                                 labels = sci_notation(yat))
           }
         }
+        if (is.character(yticklab)) {
+          axis(side = 2, at = yat, tick = FALSE, line = ypos, cex.axis =  .9*text.size,
+               labels = yticklab)
+        }
       } else {
         yaxislabels <- axis(side = 2, at = yat, las = 1, tick = FALSE, line = ypos, cex.axis =  .9*text.size,
                             labels = yticklab)
