@@ -197,7 +197,13 @@ eplot <-
             axis(side = 1, at = xat, tick = FALSE, line = xpos, cex.axis =  .9*text.size,
                  labels = sci_notation(xat))
             }
+        }
+        if (is.character(xticklab)) {
+          if (xticklab == "sci_notation") {
+            axis(side = 1, at = xat, tick = FALSE, line = xpos, cex.axis =  .9*text.size,
+                 labels = xticklab)
           }
+        }
       } else {
         axis(side = 1, at = xat, tick = FALSE, line = xpos, cex.axis =  .9*text.size,
              labels = xticklab)
