@@ -3,3 +3,4 @@ compactr.Rproj
 development
 
 !.gitignore
+.Rproj.user

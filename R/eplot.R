@@ -192,7 +192,7 @@ eplot <-
     if (par("mfg")[1] == par("mfg")[3] & annx == TRUE) {
       axis(side = 1, at = xat, labels = NA, tck = -tick.length, lwd = 0, lwd.ticks = 1)
       if (!is.null(xticklab)) {
-        if (is.character(yticklab) & length(yticklab) == 1) {
+        if (is.character(xticklab) & length(xticklab) == 1) {
           if (xticklab == "sci_notation") {
             axis(side = 1, at = xat, tick = FALSE, line = xpos, cex.axis =  .9*text.size,
                  labels = sci_notation(xat))
